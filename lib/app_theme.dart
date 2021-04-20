@@ -19,7 +19,7 @@ class AppTheme{
     //appBarTheme: , agregar color
       primaryColor:  LibColors.blue,
       primaryColorDark: LibColors.blueDark,
-      accentColor: LibColors.yellowOpacity,
+      accentColor: LibColors.blueAccent,
       backgroundColor: LibColors.white,
       brightness: Brightness.light,
 

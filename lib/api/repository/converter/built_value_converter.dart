@@ -1,4 +1,4 @@
-/*import 'package:chopper/chopper.dart';
+import 'package:chopper/chopper.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:mylibrary/api/repository/serializer/serializers.dart';
 
@@ -51,4 +51,4 @@ class BuiltValueConverter extends JsonConverter {
       value,
     );
   }
-}*/
+}

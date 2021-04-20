@@ -2,6 +2,7 @@
     package="com.fcjara.mylibrary">
    <application
         android:label="mylibrary"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

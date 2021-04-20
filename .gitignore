@@ -30,6 +30,12 @@
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
+
+# Generated Dart files
+*.g.dart
+**.g.dart
+**/*.g.dart
 
 # Web related
 lib/generated_plugin_registrant.dart

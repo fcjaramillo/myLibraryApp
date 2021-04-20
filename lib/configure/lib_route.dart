@@ -1,5 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:mylibrary/api/model/book_model.dart';
+import 'package:mylibrary/pages/detail/detail_page.dart';
 import 'package:mylibrary/pages/home/home_page.dart';
 
 class LibRoute {
@@ -25,6 +27,12 @@ class LibRoute {
   goHome(){
     return navigatorKey.currentState!.pushReplacement(
         MaterialPageRoute(builder: (_)=> HomePage())
+    );
+  }
+
+  goDetail(BookModel book){
+    return navigatorKey.currentState!.push(
+      MaterialPageRoute(builder: (_)=> DetailPage(book))
     );
   }
 

@@ -34,43 +34,30 @@ class AppTheme{
 extension GFilesAttributes on TextTheme{
 
   TextStyle get bodyTextSmall => bodyText1!.copyWith(fontSize: 12);
-  TextStyle get titleWhite => bodyText1!.copyWith(
-      color: LibColors.white,
-      fontSize: 45,
-      fontWeight: FontWeight.bold
-  );
+
   TextStyle get titleBlack => bodyText1!.copyWith(
       color: LibColors.black,
       fontSize: 20,
       fontWeight: FontWeight.bold
   );
+
   TextStyle get titleGray  => bodyText1!.copyWith(
       color: LibColors.gray,
       fontSize: 16
   );
+
+  TextStyle get subtitleblue  => bodyText1!.copyWith(
+      color: LibColors.blueDark,
+      fontSize: 18
+  );
+
   TextStyle get subtitleBlack => bodyText1!.copyWith(
       color: LibColors.black,
-      fontSize: 16
+      fontSize: 16,
   );
-  TextStyle get textDetail => bodyText1!.copyWith(
-      color: LibColors.black,
-      fontSize: 12
-  );
-  TextStyle get grayDetail => bodyText1!.copyWith(
-      color: LibColors.gray,
-      fontSize: 12
-  );
-  TextStyle get blueDetail => bodyText1!.copyWith(
-      color: LibColors.blue,
-      fontSize: 14
-  );
+
   TextStyle get textButtomWhite => bodyText1!.copyWith(
       color: LibColors.white,
-      fontSize: 14,
-      fontWeight: FontWeight.w600
-  );
-  TextStyle get textButtomBlue => bodyText1!.copyWith(
-      color: LibColors.blue,
       fontSize: 14,
       fontWeight: FontWeight.w600
   );

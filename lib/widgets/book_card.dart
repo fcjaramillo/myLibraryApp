@@ -56,11 +56,6 @@ class BookCard extends StatelessWidget {
                     SizedBox(
                       height: 4.0,
                     ),
-                    /*Text(
-                      request.asunto,
-                      style: textTheme.titleGray,
-                      overflow: TextOverflow.ellipsis,
-                    ),*/
                   ],
                 ),
               ),
@@ -73,7 +68,7 @@ class BookCard extends StatelessWidget {
                     size: 28,
                   ),*/
                   child: Icon(
-                    Icons.star_border,
+                    Icons.favorite_border,
                     size: 28,
                     color: LibColors.grayLight,
                   ),

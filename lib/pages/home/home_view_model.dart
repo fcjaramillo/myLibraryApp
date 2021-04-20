@@ -36,6 +36,10 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
     }
   }
 
+  void onTapBook(BookModel book) async {
+    await _route.goDetail(book);
+  }
+
   void onTapOpenDialog(){
     addEffect(HomeDialogSearchEffect());
   }

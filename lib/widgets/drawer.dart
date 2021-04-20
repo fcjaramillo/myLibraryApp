@@ -17,10 +17,9 @@ class AppDrawer extends StatelessWidget {
         children: <Widget>[
           _createHeader(context),
           //Divider(),
-          _createDrawerItem(context: context, icon: Icons.devices, color: LibColors.grayIcon, text: 'Buscar Libros', onTap: () => {onTap('search')}),
-          _createDrawerItem(context: context, icon: Icons.devices_other, color: LibColors.grayIcon, text: 'Favoritos', onTap: () => {onTap('favorite')}),
+          _createDrawerItem(context: context, icon: Icons.search, color: LibColors.blueAccent, text: 'Buscar Libros', onTap: () => {onTap('search')}),
+          _createDrawerItem(context: context, icon: Icons.favorite, color: LibColors.red, text: 'Favoritos', onTap: () => {onTap('favorite')}),
           Divider(),
-          //_createDrawerItem(context: context, icon: Icons.exit_to_app, color: LibColors.grayIcon, text: 'Cerrar sesión', onTap: onTapCloseSession),
         ],
       )
     );
@@ -32,18 +31,11 @@ class AppDrawer extends StatelessWidget {
 
     return DrawerHeader(
         margin: EdgeInsets.zero,
-        //margin: EdgeInsets.only(top: 8.0),
         padding: EdgeInsets.zero,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              /*child: Image.asset(
-                LibAssets.logo,
-                width: MediaQuery.of(context).size.width * 0.4,
-              ),*/
-            ),
             ListTile(
               contentPadding: EdgeInsets.only(left: 6, right: 10),
               title: Text(
@@ -54,7 +46,7 @@ class AppDrawer extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
-                'Taxis',
+                'Mi Bliblioteca',
                 style: TextStyle(
                     fontSize: 14
                 ),

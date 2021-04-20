@@ -50,10 +50,10 @@ class _HomeWidgetState extends State<HomeWidget> {
           viewModel.status.titleBar,
         ),
       ),
-      drawerScrimColor: LibColors.blueAccent,
+      drawerScrimColor: LibColors.blueOpacity,
       drawer: AppDrawer(
         onTap: (String type) => viewModel.onTapDrawer(type),
-        userName: 'data',
+        userName: 'Usuario',
       ),
       body: _homeBody(),
       floatingActionButton: FloatingActionButton(
@@ -129,7 +129,9 @@ class __homeBodyState extends State<_homeBody> {
           itemBuilder: (context, index) {
             return BookCard(
               book: viewModel.status.books[index],
-              onTap: (){},
+              onTap: (){
+                viewModel.onTapBook(viewModel.status.books[index]);
+              },
               onTapStar: (){},
             );
           },

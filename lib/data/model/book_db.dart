@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'book_db.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 0)
 class BookDb {
 
   @HiveField(0)
@@ -30,14 +30,14 @@ class BookDb {
   List<String> authorKey;
 
   BookDb({
-      required this.hasFulltext,
-      required this.editionCount,
-      required this.title,
-      required this.authorName,
-      required this.firstPublishYear,
-      required this.key,
-      required this.ia,
-      required this.authorKey,
+    required this.hasFulltext,
+    required this.editionCount,
+    required this.title,
+    required this.authorName,
+    required this.firstPublishYear,
+    required this.key,
+    required this.ia,
+    required this.authorKey,
   });
 
 }

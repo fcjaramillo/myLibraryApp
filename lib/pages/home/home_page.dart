@@ -129,10 +129,13 @@ class __homeBodyState extends State<_homeBody> {
           itemBuilder: (context, index) {
             return BookCard(
               book: viewModel.status.books[index],
+              favoriteBook: viewModel.status.favoriteBooks[index],
               onTap: (){
                 viewModel.onTapBook(viewModel.status.books[index]);
               },
-              onTapStar: (){},
+              onTapFavorite: (){
+                viewModel.onTapFavorite(viewModel.status.books[index], index);
+              },
             );
           },
         ),

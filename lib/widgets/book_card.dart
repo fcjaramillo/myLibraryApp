@@ -6,10 +6,11 @@ import 'package:mylibrary/app_theme.dart';
 class BookCard extends StatelessWidget {
 
   final BookModel book;
+  final bool favoriteBook;
   final VoidCallback onTap;
-  final VoidCallback onTapStar;
+  final VoidCallback onTapFavorite;
 
-  BookCard({required this.book, required this.onTap, required this.onTapStar});
+  BookCard({required this.book, required this.favoriteBook, required this.onTap, required this.onTapFavorite});
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +69,11 @@ class BookCard extends StatelessWidget {
                     size: 28,
                   ),*/
                   child: Icon(
-                    Icons.favorite_border,
+                    favoriteBook ? Icons.favorite : Icons.favorite_border,
                     size: 28,
-                    color: LibColors.grayLight,
+                    color: favoriteBook ? LibColors.red : LibColors.grayLight,
                   ),
-                  onTap: onTapStar,
+                  onTap: onTapFavorite,
                 ),
               ),
             ],

@@ -110,11 +110,6 @@ class __homeBodyState extends State<_homeBody> {
       }
     });
 
-
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      viewModel.onInit();
-    });
-
     super.initState();
   }
 

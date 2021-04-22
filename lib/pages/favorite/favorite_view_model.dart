@@ -1,9 +1,5 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:mylibrary/api/model/book_model.dart';
-import 'package:mylibrary/api/model/response_book_model.dart';
-import 'package:mylibrary/api/repository/interactor/book_interactor.dart';
-import 'package:mylibrary/commons/lib_constans.dart';
 import 'package:mylibrary/configure/lib_route.dart';
 import 'package:mylibrary/data/database.dart';
 import 'package:mylibrary/data/model/book_db.dart';

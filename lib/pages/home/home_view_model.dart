@@ -31,30 +31,6 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
     );
   }
 
-  void onInit() async {
-    /*final connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
-      ResponseBookModel response = await _interactor.getBooks('cien+años+de+soledad', status.page.toString());
-      BuiltList<BookDb> books =  await _database.getBooksFavorite();
-      BuiltList<bool> favoriteBooks = BuiltList();
-      bool favorite = false;
-      response.docs.forEach((d) {
-        favorite = false;
-        books.asMap().forEach((i, b) {
-          if(d.key == b.key){
-            favorite = true;
-            return;
-          }
-        });
-        favoriteBooks = favoriteBooks.rebuild((b) => b
-          ..add(favorite));
-      });
-      status = status.copyWith(books: response.docs, isLoading: false, numberList: response.docs.length, numberMaxList: response.numFound, favoriteBooks: favoriteBooks);
-    } else {
-      addEffect(HomeErrorSnackbar(LibConstans.WithOutInternet, 4));
-    }*/
-  }
-
   void onTapBook(BookModel book, bool favoriteBook) async {
     await _route.goDetail(book, favoriteBook);
   }
@@ -109,7 +85,7 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
   }
 
   String? onValidateSearch(String? value){
-    print(value);
+    //print(value);
     if (value == ''){
       return "Este campo es obligatorio.";
     }

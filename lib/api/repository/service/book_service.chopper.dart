@@ -17,8 +17,8 @@ class _$BookService extends BookService {
   final definitionType = BookService;
 
   @override
-  Future<Response<ResponseBookModel>> getBooks(String search) {
-    final $url = '/search.json?q=$search';
+  Future<Response<ResponseBookModel>> getBooks(String search, String page) {
+    final $url = '/search.json?q=$search&page=$page';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<ResponseBookModel, ResponseBookModel>($request);
   }

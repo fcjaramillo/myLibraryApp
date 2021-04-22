@@ -8,10 +8,11 @@ part 'book_service.chopper.dart';
 @ChopperApi()
 abstract class BookService extends ChopperService {
 
-  @Get(path: '/search.json?q={search}')
+  @Get(path: '/search.json?q={search}&page={page}')
   Future<Response<ResponseBookModel>> getBooks(
-      @Path() String search,
-      );
+    @Path() String search,
+    @Path() String page,
+  );
 
   static BookService create() {
     final client = ChopperClient(

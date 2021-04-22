@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mylibrary/api/model/book_model.dart';
 import 'package:mylibrary/pages/detail/detail_page.dart';
+import 'package:mylibrary/pages/favorite/favorite_page.dart';
 import 'package:mylibrary/pages/home/home_page.dart';
 
 class LibRoute {
@@ -30,9 +31,15 @@ class LibRoute {
     );
   }
 
-  goDetail(BookModel book){
+  goDetail(BookModel book, bool favoriteBook){
     return navigatorKey.currentState!.push(
-      MaterialPageRoute(builder: (_)=> DetailPage(book))
+      MaterialPageRoute(builder: (_)=> DetailPage(book, favoriteBook))
+    );
+  }
+
+  goFavorite(){
+    return navigatorKey.currentState!.push(
+      MaterialPageRoute(builder: (_)=> FavoritePage())
     );
   }
 

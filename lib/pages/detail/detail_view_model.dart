@@ -17,11 +17,18 @@ class DetailViewModel extends EffectsViewModel<DetailStatus, DetailEffect>{
         ..title = ''
         ..key = ''
       ),
+      favoriteBook: false
     );
   }
 
-  void onInit(BookModel book) async {
-    status = status.copyWith(book: book, isLoading: false);
+  void onInit(BookModel book, bool favoriteBook) async {
+    status = status.copyWith(book: book, favoriteBook: favoriteBook, isLoading: false);
+  }
+
+  void onTapFavorite(){
+    status = status.copyWith(favoriteBook: !status.favoriteBook);
+    addEffect(DetailSuccessSnackbar('''No se agrego a favoritos, 
+    estamos trabajando en ello.''', 4));
   }
 
 }

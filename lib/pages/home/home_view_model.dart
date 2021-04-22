@@ -20,18 +20,21 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
 
   HomeViewModel(this._route, this._database, this._interactor){
     status = HomeStatus(
-      isLoading: true,
+      isLoading: false,
       titleBar: 'Libros Buscados',
       books: BuiltList<BookModel>(),
       numberList: 0,
+      numberMaxList: 0,
       favoriteBooks: BuiltList<bool>(),
+      search: '',
+      page: 1
     );
   }
 
   void onInit() async {
-    final connectivityResult = await (Connectivity().checkConnectivity());
+    /*final connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
-      ResponseBookModel response = await _interactor.getBooks('cien+años+de+soledad');
+      ResponseBookModel response = await _interactor.getBooks('cien+años+de+soledad', status.page.toString());
       BuiltList<BookDb> books =  await _database.getBooksFavorite();
       BuiltList<bool> favoriteBooks = BuiltList();
       bool favorite = false;
@@ -46,14 +49,14 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
         favoriteBooks = favoriteBooks.rebuild((b) => b
           ..add(favorite));
       });
-      status = status.copyWith(books: response.docs, isLoading: false, numberList: response.docs.length, favoriteBooks: favoriteBooks);
+      status = status.copyWith(books: response.docs, isLoading: false, numberList: response.docs.length, numberMaxList: response.numFound, favoriteBooks: favoriteBooks);
     } else {
       addEffect(HomeErrorSnackbar(LibConstans.WithOutInternet, 4));
-    }
+    }*/
   }
 
-  void onTapBook(BookModel book) async {
-    await _route.goDetail(book);
+  void onTapBook(BookModel book, bool favoriteBook) async {
+    await _route.goDetail(book, favoriteBook);
   }
 
   void onTapFavorite(BookModel book, int indexBook) async {
@@ -91,8 +94,6 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
         )
       );
     }
-    books = await _database.getBooksFavorite();
-    print(books.length);
   }
 
   void onTapOpenDialog(){
@@ -115,34 +116,81 @@ class HomeViewModel extends EffectsViewModel<HomeStatus, HomeEffect>{
     return null;
   }
 
-  void onSearch(String? value) async {
+  void onSearch(String value, bool backRoute) async {
     status = status.copyWith(isLoading: true);
-    _route.pop(null);
+    if(backRoute){
+      _route.pop(null);
+    }
     final connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
-      ResponseBookModel response = await _interactor.getBooks(value!.replaceAll(RegExp(r' '), '+'));
-      status = status.copyWith(books: response.docs, isLoading: false, numberList: response.docs.length);
+      ResponseBookModel response = await _interactor.getBooks(value.replaceAll(RegExp(r' '), '+'), status.page.toString());
+      BuiltList<BookDb> books =  await _database.getBooksFavorite();
+      BuiltList<bool> favoriteBooks = BuiltList();
+      bool favorite = false;
+      response.docs.forEach((d) {
+        favorite = false;
+        books.asMap().forEach((i, b) {
+          if(d.key == b.key){
+            favorite = true;
+            return;
+          }
+        });
+        favoriteBooks = favoriteBooks.rebuild((b) => b
+          ..add(favorite));
+      });
+      status = status.copyWith(books: response.docs, isLoading: false, numberList: response.docs.length, numberMaxList: response.numFound, favoriteBooks: favoriteBooks, search: value, page: 1);
     } else {
       addEffect(HomeErrorSnackbar(LibConstans.WithOutInternet, 4));
     }
     status = status.copyWith(isLoading: false);
   }
 
+  void moreRequest() async {
+    print(status.numberMaxList);
+    print(status.page * 100);
+    if (status.numberMaxList > status.page * 100) {
+      final connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
+        status = status.copyWith(isLoading: true);
+        ResponseBookModel response = await _interactor.getBooks(status.search.replaceAll(RegExp(r' '), '+'), (status.page + 1).toString());
+        BuiltList<BookDb> books =  await _database.getBooksFavorite();
+        BuiltList<bool> favoriteBooks = status.favoriteBooks;
+        BuiltList<BookModel> statusBooks = status.books;
+        bool favorite = false;
+        response.docs.forEach((d) {
+          favorite = false;
+          books.asMap().forEach((i, b) {
+            if(d.key == b.key){
+              favorite = true;
+              return;
+            }
+          });
+          favoriteBooks = favoriteBooks.rebuild((b) => b
+            ..add(favorite));
+          statusBooks = statusBooks.rebuild((b) => b
+            ..add(d));
+        });
+        status = status.copyWith(books: statusBooks, isLoading: false, numberList: statusBooks.length, favoriteBooks: favoriteBooks, page: status.page + 1);
+      } else {
+        addEffect(HomeErrorSnackbar(LibConstans.WithOutInternet, 4));
+      }
+    } else {
+      addEffect(HomeSuccessSnackbar(LibConstans.maxBooks, 4));
+    }
+
+  }
+
   void onTapDrawer(String page) async {
     _route.pop(null);
     switch(page) {
       case "search": {
-        _route.goHome();
+
       }
       break;
 
       case "favorite": {
-        print("Excellent");
-      }
-      break;
-
-      default: {
-        print("Invalid choice");
+        await _route.goFavorite();
+        onSearch(status.search, false);
       }
       break;
     }

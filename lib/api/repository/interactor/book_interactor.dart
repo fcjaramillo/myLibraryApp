@@ -7,8 +7,8 @@ class BookInteractor {
 
   final service = BookService.create();
 
-  Future<ResponseBookModel> getBooks(String search) async {
-    final response = await service.getBooks(search);
+  Future<ResponseBookModel> getBooks(String search, String page) async {
+    final response = await service.getBooks(search, page);
     return response.body!;
   }
 

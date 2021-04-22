@@ -56,7 +56,7 @@ extension ShowSnackbar on BuildContext {
               ),
             ],
           ),
-          backgroundColor: LibColors.white,
+          backgroundColor: LibColors.greenAlert,
           margin: EdgeInsets.all(12),
           behavior: SnackBarBehavior.floating,
           duration: Duration(seconds: duration),

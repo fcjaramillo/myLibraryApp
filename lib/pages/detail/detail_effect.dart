@@ -4,14 +4,6 @@ abstract class DetailEffect extends Effect{
 
 }
 
-class DetailDialogSearchEffect extends DetailEffect {
-  DetailDialogSearchEffect();
-}
-
-class DetailFormValidate extends DetailEffect {
-  DetailFormValidate();
-}
-
 class DetailErrorSnackbar extends DetailEffect {
   final String message;
   final int duration;
